@@ -262,7 +262,34 @@
         <p style="color: white; font-weight: bold; margin-top: 20px;">正在觀測雲的流動...</p>
     </div>
     <div class="status-bar">
-        <div class="location-pill">📍 桃園</div>
+        <div class="location-pill">
+            📍
+            <select id="citySelect"
+                style="font-size:1rem; border:none; background:transparent; font-weight:900; color:var(--ac-brown);">
+                <option value="桃園市">桃園市</option>
+                <option value="新北市">新北市</option>
+                <option value="臺北市">臺北市</option>
+                <option value="基隆市">基隆市</option>
+                <option value="新竹市">新竹市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="臺中市">臺中市</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="臺南市">臺南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="臺東縣">臺東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+            </select>
+        </div>
         <div id="updateTime" class="update-pill">更新中...</div>
     </div>
 
@@ -278,7 +305,34 @@
     </div>
 
     <script>
-        const API_URL = "https://tzuweather.zeabur.app/api/weather/kaohsiung";
+        // 城市中英文對照表
+        const cityMap = {
+            "桃園市": "Taoyuan",
+            "新北市": "NewTaipei",
+            "臺北市": "Taipei",
+            "基隆市": "Keelung",
+            "新竹市": "Hsinchu",
+            "新竹縣": "HsinchuCounty",
+            "苗栗縣": "Miaoli",
+            "臺中市": "Taichung",
+            "彰化縣": "Changhua",
+            "南投縣": "Nantou",
+            "雲林縣": "Yunlin",
+            "嘉義市": "Chiayi",
+            "嘉義縣": "ChiayiCounty",
+            "臺南市": "Tainan",
+            "高雄市": "Kaohsiung",
+            "屏東縣": "Pingtung",
+            "宜蘭縣": "Yilan",
+            "花蓮縣": "Hualien",
+            "臺東縣": "Taitung",
+            "澎湖縣": "Penghu",
+            "金門縣": "Kinmen",
+            "連江縣": "Lienchiang"
+        };
+
+        let currentCity = "桃園市";
+        let API_URL = `https://tzuweather.zeabur.app/api/weather/${cityMap[currentCity]}`;
 
         function getWeatherIcon(weather) {
             if (!weather) return "🌤️";
@@ -411,6 +465,7 @@
                 const delayPromise = new Promise(resolve => setTimeout(resolve, 1500));
 
                 // 2. 定義「抓取資料」的工作
+                API_URL = `https://tzuweather.zeabur.app/api/weather/kaohsiung/${cityMap[currentCity]}`;
                 const fetchPromise = fetch(API_URL).then(res => res.json());
 
                 // 3. Promise.all 會等待「兩個都完成」才會往下走
@@ -433,6 +488,10 @@
         }
 
         document.addEventListener("DOMContentLoaded", fetchWeather);
+        document.getElementById('citySelect').addEventListener('change', function (e) {
+            currentCity = e.target.value;
+            fetchWeather();
+        });
     </script>
 </body>
 
