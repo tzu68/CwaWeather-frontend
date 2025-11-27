@@ -465,7 +465,7 @@
                 const delayPromise = new Promise(resolve => setTimeout(resolve, 1500));
 
                 // 2. 定義「抓取資料」的工作
-                API_URL = `https://tzuweather.zeabur.app/api/weather/kaohsiung/${cityMap[currentCity]}`;
+                API_URL = `https://tzuweather.zeabur.app/api/weather/${cityMap[currentCity]}`;
                 const fetchPromise = fetch(API_URL).then(res => res.json());
 
                 // 3. Promise.all 會等待「兩個都完成」才會往下走
