@@ -34,13 +34,14 @@
 
         body {
             font-family: 'Zen Maru Gothic', sans-serif;
-            background-color: var(--ac-green);
-            background-image:
-                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.2) 20px, rgba(255, 255, 255, 0.2) 40px);
             min-height: 100vh;
             color: var(--ac-dark);
             overflow-x: hidden;
             padding-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s;
         }
 
         /* 頂部狀態列 */
@@ -323,6 +324,21 @@
             const forecasts = data.forecasts;
             const current = forecasts[0];
             const others = forecasts.slice(1);
+
+            // 動態設定背景圖
+            let bgImg = "Sunny.jpg";
+            if (!current.weather || current.weather.includes("晴")) {
+                bgImg = "Sunny.jpg";
+            } else if (current.weather.includes("多雲") || current.weather.includes("陰")) {
+                bgImg = "Cloudy.png";
+            } else if (current.weather.includes("雨")) {
+                bgImg = "Rainny.jpg";
+            } else if (current.weather.includes("雷")) {
+                bgImg = "Thunderstorm.png";
+            } else {
+                bgImg = "Sunny.jpg";
+            }
+            document.body.style.backgroundImage = `url('images/${bgImg}')`;
 
             // 1. 渲染 Hero Card (主畫面)
             const advice = getAdvice(current.rain, current.maxTemp);
