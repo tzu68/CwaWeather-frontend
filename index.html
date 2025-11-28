@@ -44,6 +44,18 @@
             transition: background-image 0.5s;
         }
 
+        /* 半透明遮罩 */
+        .bg-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 0;
+            pointer-events: none;
+        }
+
         /* 頂部狀態列 */
         .status-bar {
             display: flex;
@@ -54,7 +66,7 @@
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 101;
         }
 
         /* 動森主題不需要 cappu-title */
@@ -83,6 +95,8 @@
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         /* === 核心：今日焦點卡片 === */
@@ -103,7 +117,7 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--ac-blue);
+            background: var(--ac-green);
             color: white;
             padding: 5px 20px;
             border-radius: 20px;
@@ -229,7 +243,9 @@
         }
 
         .mini-icon {
-            font-size: 2.5rem;
+            font-size: 10rem;
+            height: 10rem;
+            width: 10rem;
             margin: 5px 0;
         }
 
@@ -257,9 +273,10 @@
 </head>
 
 <body>
+    <div class="bg-mask"></div>
     <div id="loading" class="loading-screen">
-        <div style="font-size: 4rem; animation: bounce 2s infinite;">☁️</div>
-        <p style="color: white; font-weight: bold; margin-top: 20px;">正在觀測雲的流動...</p>
+        <img src="images/loading.png" alt="loading" style="width: 20vw; height: 20vw; animation: bounce 2s infinite;" />
+        <p style="color: white; font-weight: bold; margin-top: 20px; font-size: 2vw;">正在觀察天氣...</p>
     </div>
     <div class="status-bar">
         <div class="location-pill">
@@ -335,13 +352,13 @@
         let API_URL = `https://tzuweather.zeabur.app/api/weather/${cityMap[currentCity]}`;
 
         function getWeatherIcon(weather) {
-            if (!weather) return "🌤️";
-            if (weather.includes("晴")) return "☀️";
-            if (weather.includes("多雲")) return "⛅";
-            if (weather.includes("陰")) return "☁️";
-            if (weather.includes("雨")) return "🌧️";
-            if (weather.includes("雷")) return "⛈️";
-            return "🌤️";
+            if (!weather) return "Images/OtherIcon.png";
+            if (weather.includes("晴")) return "Images/SunnyIcon.png";
+            if (weather.includes("多雲")) return "Images/PartlyCloudyIcon.png";
+            if (weather.includes("陰")) return "Images/CloudyIcon.png";
+            if (weather.includes("雨")) return "Images/RainnyIcon.png";
+            if (weather.includes("雷")) return "Images/ThunderstormIcon.png";
+            return "Images/OtherIcon.png";
         }
 
         function getAdvice(rainProb, maxTemp) {
@@ -403,7 +420,7 @@
                         <div class="hero-card">
                             <div class="hero-period">${period}</div>
                             <div class="hero-temp-container">
-                                <div class="hero-icon">${getWeatherIcon(current.weather)}</div>
+                                <img class="hero-icon" src="${getWeatherIcon(current.weather)}" alt="icon" style="width:15rem;height:15rem;object-fit:contain;" />
                                 <div class="hero-temp">${avgTemp}°</div>
                             </div>
                             <div class="hero-desc">${current.weather}</div>
@@ -442,7 +459,7 @@
                 scrollContainer.innerHTML += `
                             <div class="mini-card">
                                 <div class="mini-time">${p}</div>
-                                <div class="mini-icon">${getWeatherIcon(f.weather)}</div>
+                                <img class="mini-icon" src="${getWeatherIcon(f.weather)}" alt="icon" style="width:5rem;height:5rem;object-fit:contain;" />
                                 <div class="mini-temp">${f.minTemp}° - ${f.maxTemp}°</div>
                                 <div style="font-size:0.8rem; color:#888; margin-top:5px;">💧${f.rain}</div>
                             </div>
