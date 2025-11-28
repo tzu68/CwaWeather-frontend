@@ -405,17 +405,17 @@
             const others = forecasts.slice(1);
 
             // 動態設定背景圖
-            let bgImg = "Sunny.jpg";
+            let bgImg = "Sunny_small.jpg";
             if (!current.weather || current.weather.includes("晴")) {
-                bgImg = "Sunny.jpg";
+                bgImg = "Sunny_small.jpg";
             } else if (current.weather.includes("多雲") || current.weather.includes("陰")) {
-                bgImg = "Cloudy.png";
+                bgImg = "Cloudy_small.png";
             } else if (current.weather.includes("雨")) {
-                bgImg = "Rainny.jpg";
+                bgImg = "Rainny_small.jpg";
             } else if (current.weather.includes("雷")) {
-                bgImg = "Thunderstorm.png";
+                bgImg = "Thunderstorm_small.png";
             } else {
-                bgImg = "Sunny.jpg";
+                bgImg = "Sunny_small.jpg";
             }
             document.body.style.backgroundImage = `url('images/${bgImg}')`;
 
