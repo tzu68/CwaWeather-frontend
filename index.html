@@ -360,13 +360,13 @@
         let API_URL = `https://tzuweather.zeabur.app/api/weather/${cityMap[currentCity]}`;
 
         function getWeatherIcon(weather) {
-            if (!weather) return "Images/OtherIcon.png";
-            if (weather.includes("晴")) return "Images/SunnyIcon.png";
-            if (weather.includes("多雲")) return "Images/PartlyCloudyIcon.png";
-            if (weather.includes("陰")) return "Images/CloudyIcon.png";
-            if (weather.includes("雨")) return "Images/RainnyIcon.png";
-            if (weather.includes("雷")) return "Images/ThunderstormIcon.png";
-            return "Images/OtherIcon.png";
+            if (!weather) return "images/OtherIcon.png";
+            if (weather.includes("晴")) return "images/SunnyIcon.png";
+            if (weather.includes("多雲")) return "images/PartlyCloudyIcon.png";
+            if (weather.includes("陰")) return "images/CloudyIcon.png";
+            if (weather.includes("雨")) return "images/RainnyIcon.png";
+            if (weather.includes("雷")) return "images/ThunderstormIcon.png";
+            return "images/OtherIcon.png";
         }
 
         function getAdvice(rainProb, maxTemp) {
