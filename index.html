@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>森森天氣</title>
+    <title>氣象小幫手</title>
     <link rel="icon" type="image/png" href="./icon-v2.png">
     <link rel="apple-touch-icon" href="./icon-v2.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./icon-v2.png">
@@ -42,6 +42,10 @@
             background-position: center;
             background-repeat: no-repeat;
             transition: background-image 0.5s;
+        }
+
+        div {
+            font-size: 1vw;
         }
 
         /* 半透明遮罩 */
@@ -222,6 +226,10 @@
         }
 
         .mini-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
             min-width: 140px;
             background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
@@ -362,20 +370,20 @@
         }
 
         function getAdvice(rainProb, maxTemp) {
-            let rainIcon = "🌂";
+            let rainIcon = "images/umberalla_Close.png";
             let rainText = "不用帶傘";
             if (parseInt(rainProb) > 30) {
-                rainIcon = "☂️";
+                rainIcon = "images/umberalla_Open.png";
                 rainText = "記得帶傘！";
             }
 
-            let clothIcon = "👕";
+            let clothIcon = "images/Warm.jpg";
             let clothText = "舒適穿搭";
             if (parseInt(maxTemp) >= 28) {
-                clothIcon = "🎽";
+                clothIcon = "images/Hot.jpg";
                 clothText = "短袖出發";
             } else if (parseInt(maxTemp) <= 20) {
-                clothIcon = "🧥";
+                clothIcon = "images/Cold.jpg";
                 clothText = "加件外套";
             }
 
@@ -427,12 +435,12 @@
                             
                             <div class="advice-grid">
                                 <div class="advice-item">
-                                    <div class="advice-icon">${advice.rainIcon}</div>
+                                    <img class="advice-icon" src="${advice.rainIcon}" alt="rain-icon" style="width:5rem;height:5rem;object-fit:contain;" />
                                     <div class="advice-text">${advice.rainText}</div>
                                     <div style="font-size:0.7rem; color:#999">降雨率 ${current.rain}</div>
                                 </div>
                                 <div class="advice-item">
-                                    <div class="advice-icon">${advice.clothIcon}</div>
+                                    <img class="advice-icon" src="${advice.clothIcon}" alt="cloth-icon" style="width:5rem;height:5rem;object-fit:contain;" />
                                     <div class="advice-text">${advice.clothText}</div>
                                     <div style="font-size:0.7rem; color:#999">最高溫 ${current.maxTemp}°</div>
                                 </div>
