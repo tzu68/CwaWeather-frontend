@@ -371,20 +371,20 @@
 
         function getAdvice(rainProb, maxTemp) {
             let rainIcon = "images/umberalla_Close.png";
-            let rainText = "不用帶傘";
+            let rainText = "不用帶傘～";
             if (parseInt(rainProb) > 30) {
                 rainIcon = "images/umberalla_Open.png";
-                rainText = "記得帶傘！";
+                rainText = "會下雨喔ＱＱ";
             }
 
             let clothIcon = "images/Warm.jpg";
-            let clothText = "舒適穿搭";
+            let clothText = "舒適溫度";
             if (parseInt(maxTemp) >= 28) {
                 clothIcon = "images/Hot.jpg";
-                clothText = "短袖出發";
+                clothText = "好熱喔！";
             } else if (parseInt(maxTemp) <= 20) {
                 clothIcon = "images/Cold.jpg";
-                clothText = "加件外套";
+                clothText = "有點冷喔！";
             }
 
             return { rainIcon, rainText, clothIcon, clothText };
